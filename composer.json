@@ -1,0 +1,20 @@
+{
+    "name": "apwd/wp-nonce-oo",
+    "description": "Object oriented version of WordPress nonce functionality",
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "Aaron Peachey",
+            "email": "aaron@aaronpeacheywebdesign.com"
+        }
+    ],
+    "require" : {},
+    "require-dev": {
+        "phpunit/phpunit": "5.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "apwd\\WP_Nonce_OO\\": "src"
+        }
+    }
+}
