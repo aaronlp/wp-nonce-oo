@@ -3,7 +3,7 @@
 This package provides an object oriented approach to nonce generation and checking. It can be used instead of the wp_nonce functionality in your plugin or theme. 
 
 ## Simple usage example
-
+```
 $generator = APWD\WP_Nonce_OO\WP_Nonce_OO('my_action');
 $generator->setNonceExpiry(120);   //override the nonce expiry time to 2 minutes
 $generator->createNonce();         //creates and persists a new nonce and returns it
@@ -16,3 +16,4 @@ $nonce_valid = $generator->useNonce($_REQUEST['nonce']);
 if ($nonce_valid) {
     //Process form
 }
+```
