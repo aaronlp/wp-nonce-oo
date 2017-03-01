@@ -9,7 +9,7 @@ class WP_Nonce_OO {
     function __construct($action) {
         $this->action = $action;
         $this->user_id = get_current_user_id();
-        $this->expiry_time = $this->setNonceExpiry(self::$default_expiry);
+        $this->expiry_time = $this->setNonceExpiry(self::default_expiry);
         $this->nonce = null;
         $this->nonce_expiry = null;
     }
@@ -27,6 +27,15 @@ class WP_Nonce_OO {
         }
         $this->expiry_time = $seconds;
         return true;
+    }
+    
+    /**
+    * Return current default expiry time for new nonces
+    *   
+    * @return int Current expiry figure in seconds
+   */
+    public function getNonceExpiry() {
+        return $this->expiry_time;
     }
     
     /**
