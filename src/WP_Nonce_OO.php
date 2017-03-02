@@ -12,6 +12,10 @@ class WP_Nonce_OO {
         $this->expiry_time = $this->setNonceExpiry(self::default_expiry);
         $this->nonce = null;
         $this->nonce_expiry = null;
+        //determine maximum length of nonce since the total size of the key being added
+        //to the wp_options table must be 64 chars or less
+        //accounts for the prefix being used by this class plus an extra underscore
+        $this->nonce_length = 64 - strlen(self::opt_key_prefix) + 1;
     }
     
    /**
@@ -50,8 +54,10 @@ class WP_Nonce_OO {
         $string = $salt . $this->action . $time;
         $string .= $this->user_id ? $this->user_id : '';
         
-        $this->nonce = sha1($string);
-        $this->nonce_expiry = time() + $this->default_expiry;
+        //generate sha1 hash (40 chars) and truncate to ensure total length of 
+        //nonce key in wp_options table will be <= 64 chars
+        $this->nonce = substr(sha1($string), 0, $this->nonce_length);
+        $this->nonce_expiry = time() + $this->expiry_time;
         
         $this->saveNonce();
         return $this->nonce;
